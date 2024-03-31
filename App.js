@@ -1,18 +1,24 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, FlatList } from "react-native"; // Corrected FlatList
 import exercises from "./assets/data/exercises.json";
 
 export default function App() {
-  const exercise = exercises[0];
-  console.log(exercise);
   return (
     <View style={styles.container}>
-      <View style={styles.exerciseContainer}>
-        <Text style={styles.exerciseName}>{exercise.name}</Text>
-        <Text style={styles.exerciseSubtitle}>{exercise.muscle}</Text>
-        <Text style={styles.exerciseSubtitle}>{exercise.equipment}</Text>
-        <StatusBar style="auto" />
-      </View>
+      <FlatList
+        data={exercises}
+        renderItem={({ item }) => {
+          return (
+            <View style={styles.exerciseContainer}>
+              <Text style={styles.exerciseName}>{item.name}</Text>
+              <Text style={styles.exerciseSubtitle}>
+                {item.muscle.toUpperCase()} | {item.equipment.toUpperCase()}
+              </Text>
+              <StatusBar style="auto" />
+            </View>
+          );
+        }}
+      />
     </View>
   );
 }
@@ -29,17 +35,21 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: 12,
     borderRadius: 10,
-    gap: 5,
+    margin: 5, // Note: 'gap' might not work as expected in React Native; consider using margin instead.
+    shadowColor: "#171717",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
 
   exerciseName: {
     fontSize: 24,
-    fontWeight: 500,
+    fontWeight: "500", // Corrected fontWeight
     color: "black",
   },
 
   exerciseSubtitle: {
-    fontsize: 16,
+    fontSize: 16, // Corrected fontSize
     color: "dimgray",
   },
 });
