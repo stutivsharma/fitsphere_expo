@@ -1,0 +1,8 @@
+curl https://api.api-ninjas.com/v1/exercises\?muscle\=biceps \
+ -H "X-API-KEY: rsFC7kNjEG6/1A9oCO4jnQ==QYxdAQp257cerqAA"
+
+ curl https://api.api-ninjas.com/v1/exercises \
+ -H "X-API-KEY: rsFC7kNjEG6/1A9oCO4jnQ==QYxdAQp257cerqAA"
+
+API KEY: rsFC7kNjEG6/1A9oCO4jnQ==QYxdAQp257cerqAA
+
