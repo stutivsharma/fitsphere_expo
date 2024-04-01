@@ -1,0 +1,52 @@
+stepzen import curl --request POST 'https://us-west-2.aws.data.mongodb-api.com/app/data-surol/endpoint/data/v1/action/find' \
+--header 'Content-Type: application/json' \
+--header 'Access-Control-Request-Headers: *' \
+--header 'api-key: pfDWEQoq2vxe2mrOH22iYvoo3QqC2QlqCDiZoGe03PRZph8x5AhLDnIf9YMtlVbM' \
+--data-raw '{
+    "collection":"sets",
+    "database":"workouts",
+    "dataSource":"Cluster0"
+}'
+
+
+stepzen import curl "https://us-west-2.aws.data.mongodb-api.com/app/data-surol/endpoint/data/v1/action/insertOne" \
+  -X POST \
+  -H "apiKey: pfDWEQoq2vxe2mrOH22iYvoo3QqC2QlqCDiZoGe03PRZph8x5AhLDnIf9YMtlVbM" \
+  -H 'Content-Type: application/json' \
+  -H "Accept: application/json" \
+  -d '{
+    "dataSource": "Cluster0",
+    "database": "workouts",
+    "collection": "sets",
+    "document": {
+      "exercise": "push",
+      "weight": 4,
+      "reps": 2
+    }
+  }'
+
+ stepzen import curl --request POST 'https://us-west-2.aws.data.mongodb-api.com/app/data-surol/endpoint/data/v1/action/find' \
+  --header 'Content-Type: application/json' \
+  --header 'Access-Control-Request-Headers: *' \
+  --header 'api-key: pfDWEQoq2vxe2mrOH22iYvoo3QqC2QlqCDiZoGe03PRZph8x5AhLDnIf9YMtlVbM' \
+  --data-raw '{
+      "collection":"sets",
+      "database":"workouts",
+      "dataSource":"Cluster0"
+  }'
+  
+
+  curl -s "https://us-west-2.aws.data.mongodb-api.com/app/data-surol/endpoint/data/v1/action/insertOne" \
+  -X POST \
+  -H "apiKey: $API_KEY" \
+  -H 'Content-Type: application/ejson' \
+  -H "Accept: application/json" \
+  -d '{
+    "dataSource": "mongodb-atlas",
+    "database": "learn-data-api",
+    "collection": "tasks",
+    "document": {
+      "status": "open",
+      "text": "Do the dishes"
+    }
+  }'

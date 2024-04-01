@@ -1,31 +1,39 @@
-import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { useLocalSearchParams, Stack } from "expo-router";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  ActivityIndicator,
+} from "react-native";
+import { useLocalSearchParams } from "expo-router";
 import exercises from "../../assets/data/exercises.json";
+import { Stack } from "expo-router";
 import { useState } from "react";
 import { gql } from "graphql-request";
 import { useQuery } from "@tanstack/react-query";
 import graphqlClient from "../graphqlClient";
-import { ActivityIndicator } from "react-native-web";
+import NewSetInput from "../components/NewSetInput";
+import SetsList from "../components/SetList";
 
 const exerciseQuery = gql`
   query exercises($name: String) {
     exercises(name: $name) {
-      muscle
       name
-      type
+      muscle
       instructions
       equipment
-      difficulty
     }
   }
 `;
 
-export default function ExerciseDetails() {
+export default function ExerciseDetailsScreen() {
   const { name } = useLocalSearchParams();
   const { data, isLoading, error } = useQuery({
     queryKey: ["exercises", name],
     queryFn: () => graphqlClient.request(exerciseQuery, { name }),
   });
+
+  const [isInstructionExpanded, setIsInstructionExpanded] = useState(false);
 
   if (isLoading) {
     return <ActivityIndicator />;
@@ -34,51 +42,75 @@ export default function ExerciseDetails() {
   if (error) {
     return <Text>Failed to fetch data</Text>;
   }
+
   const exercise = data.exercises[0];
 
   if (!exercise) {
-    return <Text> Exercise Not Found </Text>;
+    return <Text>Exercise not found</Text>;
   }
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <Stack.Screen options={{ title: exercise.name }} />
-      <Text style={styles.exerciseName}>{exercise.name}</Text>
-      <Text style={styles.exerciseSubtitle}>
-        {exercise.muscle.toUpperCase()} | {exercise.equipment.toUpperCase()}
-      </Text>
-      <Text style={styles.exerciseSubtitle}>
-        {exercise.difficulty} | {exercise.instructions}
-      </Text>
+
+      <View style={styles.panel}>
+        <Text style={styles.exerciseName}>{exercise.name}</Text>
+
+        <Text style={styles.exerciseSubtitle}>
+          <Text style={styles.subValue}>{exercise.muscle}</Text> |{" "}
+          <Text style={styles.subValue}>{exercise.equipment}</Text>
+        </Text>
+      </View>
+
+      <View style={styles.panel}>
+        <Text
+          style={styles.instructions}
+          numberOfLines={isInstructionExpanded ? 0 : 3}
+        >
+          {exercise.instructions}
+        </Text>
+        <Text
+          onPress={() => setIsInstructionExpanded(!isInstructionExpanded)}
+          style={styles.seeMore}
+        >
+          {isInstructionExpanded ? "See less" : "See more"}
+        </Text>
+      </View>
+
+      <NewSetInput />
+      <SetsList />
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    padding: 100,
+    padding: 10,
+    gap: 10,
   },
-
-  exerciseContainer: {
-    backgroundColor: "#fff",
-    padding: 16,
-    borderRadius: 10,
-    margin: 5,
-    paddingHorizontal: 10,
-    shadowColor: "#171717",
-    shadowOffset: { width: -2, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
+  panel: {
+    backgroundColor: "white",
+    padding: 10,
+    borderRadius: 5,
   },
-
   exerciseName: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: "500",
-    color: "black",
   },
-
   exerciseSubtitle: {
-    fontSize: 16,
     color: "dimgray",
+  },
+  subValue: {
+    textTransform: "capitalize",
+  },
+  instructions: {
+    fontSize: 16,
+    lineHeight: 22,
+  },
+  seeMore: {
+    alignSelf: "center",
+    padding: 5,
+    fontWeight: "600",
+    color: "gray",
   },
 });
