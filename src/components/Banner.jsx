@@ -7,6 +7,7 @@ import {
   Text,
   View,
 } from "react-native";
+import { Link } from "expo-router";
 
 const banner = require("../../assets/images/BG.png");
 const fire = require("../../assets/images/fire.png");
@@ -46,7 +47,9 @@ const Banner = () => {
     <>
       <ImageBackground style={styles.banner} source={banner}>
         <View style={styles.bannerContainer}>
-          <Text style={styles.offer}>LOG YOUR WORKOUT</Text>
+          <Link href="/exercises">
+            <Text style={styles.offer}>LOG YOUR WORKOUT</Text>
+          </Link>
 
           <View style={styles.rowLabel}>
             <Animated.View
@@ -60,6 +63,7 @@ const Banner = () => {
                 resizeMode="contain"
                 style={styles.fireImage}
               />
+
               <Text style={styles.offerText}>don't lose your streak!</Text>
             </Animated.View>
           </View>

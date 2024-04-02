@@ -28,6 +28,7 @@
     "react-native-screens": "~3.29.0",
     "react-native-snap-carousel": "^3.9.1",
     "react-native-web": "~0.19.6",
+    "react-native-webview": "13.6.4",
     "react-navigation": "^5.0.0"
   },
   "devDependencies": {
