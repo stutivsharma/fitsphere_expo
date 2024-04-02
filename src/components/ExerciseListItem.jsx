@@ -1,16 +1,16 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Pressable } from "react-native"; // Corrected FlatList
+import { StyleSheet, Text, View, Pressable } from "react-native";
 import { Link } from "expo-router";
 
-function ExerciseListItem({ item }) {
+export default function ExerciseListItem({ item }) {
   return (
     <Link href={`/${item.name}`} asChild>
       <Pressable style={styles.exerciseContainer}>
         <Text style={styles.exerciseName}>{item.name}</Text>
+
         <Text style={styles.exerciseSubtitle}>
-          {item.muscle.toUpperCase()} | {item.equipment.toUpperCase()}
+          <Text style={styles.subValue}>{item.muscle}</Text> |{" "}
+          <Text style={styles.subValue}>{item.equipment}</Text>
         </Text>
-        <StatusBar style="auto" />
       </Pressable>
     </Link>
   );
@@ -19,26 +19,30 @@ function ExerciseListItem({ item }) {
 const styles = StyleSheet.create({
   exerciseContainer: {
     backgroundColor: "#fff",
-    padding: 16,
+    padding: 10,
     borderRadius: 10,
-    margin: 5,
-    paddingHorizontal: 10,
-    shadowColor: "#171717",
-    shadowOffset: { width: -2, height: 4 },
+    gap: 5,
+    marginHorizontal: 2,
+
+    // shadow
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
     shadowOpacity: 0.2,
-    shadowRadius: 3,
-  },
+    shadowRadius: 1.41,
 
+    elevation: 2,
+  },
   exerciseName: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: "500",
-    color: "black",
   },
-
   exerciseSubtitle: {
-    fontSize: 16,
     color: "dimgray",
   },
+  subValue: {
+    textTransform: "capitalize",
+  },
 });
-
-export default ExerciseListItem;

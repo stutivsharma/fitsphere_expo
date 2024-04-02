@@ -38,15 +38,32 @@ stepzen import curl "https://us-west-2.aws.data.mongodb-api.com/app/data-surol/e
 
   curl -s "https://us-west-2.aws.data.mongodb-api.com/app/data-surol/endpoint/data/v1/action/insertOne" \
   -X POST \
-  -H "apiKey: $API_KEY" \
+  -H "apiKey: pfDWEQoq2vxe2mrOH22iYvoo3QqC2QlqCDiZoGe03PRZph8x5AhLDnIf9YMtlVbM" \
   -H 'Content-Type: application/ejson' \
   -H "Accept: application/json" \
   -d '{
-    "dataSource": "mongodb-atlas",
-    "database": "learn-data-api",
-    "collection": "tasks",
+    "dataSource": "Cluster0",
+    "database": "workouts",
+    "collection": "sets",
     "document": {
-      "status": "open",
-      "text": "Do the dishes"
+      "exercise": "press",
+      "weight": "9",
+      "reps": 2
+    }
+  }'
+
+  stepzen import curl "https://us-west-2.aws.data.mongodb-api.com/app/data-surol/endpoint/data/v1/action/insertOne" \
+  -X POST \
+  -H "apiKey: pfDWEQoq2vxe2mrOH22iYvoo3QqC2QlqCDiZoGe03PRZph8x5AhLDnIf9YMtlVbM" \
+  -H 'Content-Type: application/json' \
+  -H "Accept: application/json" \
+  -d '{
+    "dataSource": "Cluster0",
+    "database": "workouts",
+    "collection": "sets",
+    "document": {
+      "exercise": "press",
+      "weight": "9",
+      "reps": 2
     }
   }'
