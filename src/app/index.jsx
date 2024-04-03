@@ -8,6 +8,7 @@ import {
   Text,
   View,
 } from "react-native";
+import { Link } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Progress from "react-native-progress";
 import * as Font from "expo-font";
@@ -84,17 +85,20 @@ export default function App() {
             >
               Learn More about Fitness
             </Text>
-            <Text
-              style={{
-                fontFamily: "Poppins-Regular",
-                opacity: 0.5,
-                fontSize: 12,
-                marginTop: 60,
-                color: "#006796",
-              }}
-            >
-              View All
-            </Text>
+            <Link href="/Videos">
+              {" "}
+              <Text
+                style={{
+                  fontFamily: "Poppins-Regular",
+                  opacity: 0.5,
+                  fontSize: 12,
+                  marginTop: 60,
+                  color: "#006796",
+                }}
+              >
+                View All
+              </Text>{" "}
+            </Link>
           </View>
           <VideoPlay />
         </View>

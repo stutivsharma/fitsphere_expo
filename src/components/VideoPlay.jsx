@@ -40,7 +40,7 @@ const VideoPlay = () => {
       <View style={styles.cardContainer}>
         <View style={{ borderRadius: 10, overflow: "hidden" }}>
           <ImageBackground
-            source={require("../../assets/images/photo2.png")}
+            source={item.image}
             style={{
               height: 150,
               width: 300,
