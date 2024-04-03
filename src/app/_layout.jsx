@@ -21,7 +21,15 @@ export default function RootLayout() {
           name="index"
           options={{
             title: "Fitsphere",
-            headerTitle: (props) => <LogoTitle {...props} />,
+            headerTitle: (props) => (
+              <LogoTitle
+                {...props}
+                style={{
+                  backgroundColor: "purple",
+                  padding: 0,
+                }}
+              />
+            ),
           }}
         ></Stack.Screen>
       </Stack>

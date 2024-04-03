@@ -17,6 +17,7 @@ import Card from "../components/Card";
 import BottomTab from "../components/BottomTab";
 import Banner from "../components/Banner";
 import Header from "../components/Header";
+import Calendar from "../components/Calendar";
 
 const cycle = require("../../assets/images/cycle.png");
 const yoga = require("../../assets/images/yoga.png");
@@ -97,6 +98,7 @@ export default function App() {
           </View>
           <VideoPlay />
         </View>
+        <Calendar />
       </ScrollView>
       <BottomTab />
     </>

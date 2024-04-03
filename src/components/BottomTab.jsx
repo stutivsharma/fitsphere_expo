@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Image, View } from "react-native";
+import { Link } from "expo-router";
+import Calendar from "./Calendar";
 
 const home = require("../../assets/images/Home.png");
 const heart = require("../../assets/images/H.png");
@@ -60,7 +62,6 @@ export class BottomTab extends Component {
             borderRadius: 35,
           }}
         />
-        <BottomButton />
         <BottomButton image={calendar} />
         <BottomButton image={profile} />
       </View>
